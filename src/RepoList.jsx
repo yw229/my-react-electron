@@ -30,7 +30,7 @@ class RepoList extends Component{
 
 	handleEvent=(event)=>{
 		event.preventDefault();
-		const api = event.target.text;
+		const api = event.target.href;
 		this.setState({current_repo:api});
  		console.log(api);
 		this.props.fetchIssues(api);
@@ -45,6 +45,7 @@ class RepoList extends Component{
 		this.props.getSortedList(sorted_issuelist);
 	}
 
+	extractElement=(url)=> url.split('/').slice(-3,-1);
 
 	render(){
 		let main_class = this.state.current_repo ?  'layout' : null,
@@ -61,7 +62,7 @@ class RepoList extends Component{
 				</div>
 				<div>
 					<ul className = 'text-center'>
-					{ this.props.allRepos.map((element,i) => <li key ={i}> <a onClick={this.handleEvent} href={element}>{element}</a></li> )}
+					{ this.props.allRepos.map((element,i) => <li key ={i}> <a onClick={this.handleEvent} href={element}>{this.extractElement(element)[0]} {this.extractElement(element)[1]}</a></li> )}
 					</ul>
 				</div>
 			</div>
