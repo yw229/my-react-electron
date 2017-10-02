@@ -1,0 +1,8 @@
+li {
+  list-style-type: none;
+}
+
+.layout{
+	display: flex; 
+	flex-wrap: nowrap;
+}
