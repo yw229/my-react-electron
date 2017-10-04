@@ -1,0 +1,8 @@
+@import "RepoList";
+
+$color:red;
+$alpha:0.4;
+body {
+	font:100% Helvetica, sans-serif;
+	background-color: rgba($color, $alpha);
+}

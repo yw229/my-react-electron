@@ -48,7 +48,7 @@ class RepoList extends Component{
 	extractElement=(url)=> url.split('/').slice(-3,-1);
 
 	render(){
-		let main_class = this.state.current_repo ?  'layout' : null,
+		let main_class = this.state.current_repo ?  'layout' : 'box_extend',
 		//let main_class = 'layout',
 		list = this.props.sortedIssueList.length>0 ? this.props.sortedIssueList:this.props.IssuesOfOne,
 		label = this.props.sortedIssueList.length === 0 ? 'Click to Sort By Priority':'Sorted',
@@ -56,19 +56,19 @@ class RepoList extends Component{
 		
 		return(
 		<div className={main_class}>
-			<div >
-				<div className = 'text-center'>
+			<div className = "all-repo">
+				<div>
 					All Issues Repositories
 				</div>
 				<div>
-					<ul className = 'text-center'>
-					{ this.props.allRepos.map((element,i) => <li key ={i}> <a onClick={this.handleEvent} href={element}>{this.extractElement(element)[0]} {this.extractElement(element)[1]}</a></li> )}
+					<ul>
+					{ this.props.allRepos.map((element,i) => <li key ={i}> <a onClick={this.handleEvent} href={element}>{this.extractElement(element)[0]}:{this.extractElement(element)[1]}</a></li> )}
 					</ul>
 				</div>
 			</div>
 			{this.state.current_repo ? 
-    		<div >
-				<p>Issues of Repo <code>{this.state.current_repo}</code></p>
+    		<div className="repo_info">
+				<p>Issues of Repo <code><a href={this.state.current_repo}>{this.state.current_repo}</a></code></p>
 				<button type="button" onClick={this.sortBy} className={buttonStyle}>{label}</button>
 				<ul>
 					{list.map((item,i)=><li key={i}><a href={item} target="_blank">{item}</a></li>)}
