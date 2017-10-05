@@ -1,5 +1,5 @@
 import { GET_ISSUES_OF_ONE_REPO, GET_ALL_AVAILABLE_REPOS,
-	REQUEST_FAILED,SORT_ISSUES_BY_PRIORITY, INCREAMENT,DECREAMENT
+	REQUEST_FAILED,SORT_ISSUES_BY_PRIORITY, INCREAMENT,DECREAMENT,RESETCOUNTER
 } from './types';
 
 export const getAllIssuesOfRepo=(url)=>{
@@ -25,6 +25,9 @@ export const getAllIssuesOfRepo=(url)=>{
 
 export const getRepos = avail=> dispatch => dispatch(getAllRepos(avail));
 export const getSortedList = sorted => dispatch => dispatch(getSortedIssueList(sorted));
+export const increase = value => dispatch => dispatch(increaseByOne(value));
+export const decrease = value => dispatch => dispatch(decreaseByOne(value));
+export const reset =() => dispatch => dispatch(resetValue(0));
 
 const httpRequest = (url, method, data) => 
 	fetch(url, {
@@ -56,3 +59,17 @@ const getSortedIssueList = (list)=>({
 	data:list
 });
 
+const increaseByOne = (value) =>({
+	type:INCREAMENT,
+	data:value 
+});
+
+const decreaseByOne = (value) =>({
+	type:DECREAMENT,
+	data:value
+});
+
+const resetValue=(value)=>({
+	type:RESETCOUNTER,
+	data:value
+})

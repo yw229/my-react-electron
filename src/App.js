@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import RepoList from './RepoList';
+import Clock from './clock';
+
 import {GET_ALL_ISSUES} from './services/apis';
 import { getAllIssuesOfRepo, getRepos} from './services/actions';
 
@@ -26,6 +28,7 @@ class App extends Component {
           <h2>Welcome to Git Issues Portal</h2>
         </div>
       </div>
+      <Clock/>
       <RepoList/>
       </div>
     );

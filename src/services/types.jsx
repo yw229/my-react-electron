@@ -4,3 +4,4 @@ export const REQUEST_FAILED = 'request_failed';
 export const SORT_ISSUES_BY_PRIORITY = 'sort_issues_by_priority';
 export const INCREAMENT = 'increament';
 export const DECREAMENT = 'descrement';
+export const RESETCOUNTER = 'resetcounter';

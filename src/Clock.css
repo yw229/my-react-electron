@@ -1,0 +1,11 @@
+.clock-lay-out {
+  position: relative;
+  display: flex;
+  padding: 3px;
+  top: 10px;
+  left: 100px;
+  right: 100px; }
+  .clock-lay-out .label-text {
+    color: rgba(255, 0, 0, 0.4); }
+
+/*# sourceMappingURL=Clock.css.map */

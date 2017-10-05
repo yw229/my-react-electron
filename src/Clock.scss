@@ -1,0 +1,13 @@
+$label-color:red;
+$alpha:0.4;
+.clock-lay-out{
+	position:relative;
+	display: flex;
+	padding:3px;
+	top:10px;
+	left: 100px;
+	right: 100px;
+	.label-text{
+		color: rgba($label-color,$alpha);
+	}
+}
