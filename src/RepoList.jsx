@@ -7,12 +7,12 @@ import { getAllIssuesOfRepo, getRepos,getSortedList } from './services/actions';
 
 class RepoList extends Component{
 	constructor(props) {
-	  super(props);
-	
-	  this.state = {
-	  	current_repo:'',
-	  	IssuesOfOne:[]
-	  };
+		super(props);
+		
+		this.state = {
+			current_repo:'',
+			IssuesOfOne:[]
+		};
 	}
 	componentDidMount() {
 		this.props.getRepos(GET_ALL_ISSUES()); 
@@ -32,9 +32,9 @@ class RepoList extends Component{
 		event.preventDefault();
 		const api = event.target.href;
 		this.setState({current_repo:api});
- 		console.log(api);
+		console.log(api);
 		this.props.fetchIssues(api);
- 		this.setState({IssuesOfOne:this.props.IssuesOfOne})
+		this.setState({IssuesOfOne:this.props.IssuesOfOne});
 	}
 
 	sortBy=(event)=>{
@@ -49,48 +49,48 @@ class RepoList extends Component{
 
 	render(){
 		let main_class = this.state.current_repo ?  'layout' : 'box_extend',
-		//let main_class = 'layout',
-		list = this.props.sortedIssueList.length>0 ? this.props.sortedIssueList:this.props.IssuesOfOne,
-		label = this.props.sortedIssueList.length === 0 ? 'Click to Sort By Priority':'Sorted',
-		buttonStyle = this.props.sortedIssueList.length === 0 ? "btn btn-default":"btn btn-info";
+			//let main_class = 'layout',
+			list = this.props.sortedIssueList.length>0 ? this.props.sortedIssueList:this.props.IssuesOfOne,
+			label = this.props.sortedIssueList.length === 0 ? 'Click to Sort By Priority':'Sorted',
+			buttonStyle = this.props.sortedIssueList.length === 0 ? 'btn btn-default':'btn btn-info';
 		
 		return(
-		<div className={main_class}>
-			<div className = "all-repo">
-				<div>
+			<div className={main_class}>
+				<div className = "all-repo">
+					<div>
 					All Issues Repositories
+					</div>
+					<div>
+						<ul>
+							{ this.props.allRepos.map((element,i) => <li key ={i}> <a onClick={this.handleEvent} href={element}>{this.extractElement(element)[0]}:{this.extractElement(element)[1]}</a></li> )}
+						</ul>
+					</div>
 				</div>
-				<div>
-					<ul>
-					{ this.props.allRepos.map((element,i) => <li key ={i}> <a onClick={this.handleEvent} href={element}>{this.extractElement(element)[0]}:{this.extractElement(element)[1]}</a></li> )}
-					</ul>
-				</div>
-			</div>
-			{this.state.current_repo ? 
-    		<div className="repo_info">
-				<p>Issues of Repo <code><a href={this.state.current_repo}>{this.state.current_repo}</a></code></p>
-				<button type="button" onClick={this.sortBy} className={buttonStyle}>{label}</button>
-				<ul>
-					{list.map((item,i)=><li key={i}><a href={item} target="_blank">{item}</a></li>)}
-				</ul>
-			</div> : null  }
-		</div>)
+				{this.state.current_repo ? 
+					<div className="repo_info">
+						<p>Issues of Repo <code><a href={this.state.current_repo}>{this.state.current_repo}</a></code></p>
+						<button type="button" onClick={this.sortBy} className={buttonStyle}>{label}</button>
+						<ul>
+							{list.map((item,i)=><li key={i}><a href={item} target="_blank">{item}</a></li>)}
+						</ul>
+					</div> : null  }
+			</div>);
 	}
 }
 
 
 const mapStateToProps = (state) => ({
-  allRepos:state.allRepos,
-  IssuesOfOneAll: state.IssuesOfOne,
-  IssuesOfOne:state.IssuesOfOne? state.IssuesOfOne.map(obj=>obj.html_url):null,
-  sortedIssueList: state.sortedIssueList,
-  error:state.failedMessage
+	allRepos:state.allRepos,
+	IssuesOfOneAll: state.IssuesOfOne,
+	IssuesOfOne:state.IssuesOfOne? state.IssuesOfOne.map(obj=>obj.html_url):null,
+	sortedIssueList: state.sortedIssueList,
+	error:state.failedMessage
 });
 
 const mapDispatchToProps = {
-  fetchIssues: getAllIssuesOfRepo,
-  getRepos : getRepos,
-  getSortedList: getSortedList
+	fetchIssues: getAllIssuesOfRepo,
+	getRepos : getRepos,
+	getSortedList: getSortedList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepoList);

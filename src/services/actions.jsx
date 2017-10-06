@@ -27,7 +27,7 @@ export const getRepos = avail=> dispatch => dispatch(getAllRepos(avail));
 export const getSortedList = sorted => dispatch => dispatch(getSortedIssueList(sorted));
 export const increase = value => dispatch => dispatch(increaseByOne(value));
 export const decrease = value => dispatch => dispatch(decreaseByOne(value));
-export const reset =() => dispatch => dispatch(resetValue(0));
+export const reset = value => dispatch => dispatch(resetValue(value));
 
 const httpRequest = (url, method, data) => 
 	fetch(url, {
